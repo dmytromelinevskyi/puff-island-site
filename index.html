@@ -1,0 +1,428 @@
+<title>Puff Island</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Острів біля вирізу Мака, на якому живе Пуф. Безкоштовно для macOS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&family=Silkscreen&display=swap">
+<style>
+/* Layout: a dark Mac screen edge with the island hanging from the notch, then the island's sections as a strip of real screens. */
+:root {
+  --night: #0a0d12;      /* the screen around the notch */
+  --panel: #131820;      /* cards */
+  --raise: #1c2330;      /* pressed controls, chips */
+  --line: rgba(214, 228, 248, .1);
+  --text: #eef2f8;
+  --muted: #9ba7b8;
+  --accent: #7abdff;     /* the island's "Sky" accent */
+  --accent-ink: #06182c;
+  --fur: #f6e2c4;        /* Puff */
+  --display: "Nunito", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  --body: "Nunito", ui-rounded, system-ui, -apple-system, sans-serif;
+  --pixel: "Silkscreen", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--night); color: var(--text); font-family: var(--body); font-size: 17px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing: antialiased;
+}
+img.px { image-rendering: pixelated; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+.wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 112px; padding-block: 0 72px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 900; line-height: 1.1; }
+h3 { font-size: 19px; font-weight: 800; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 60ch; }
+.label { font-family: var(--pixel); font-size: 12px; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; }
+section { display: flex; flex-direction: column; gap: 28px; }
+.head { display: flex; flex-direction: column; gap: 12px; }
+
+/* Top bar: language switch */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; justify-content: space-between; align-items: center;
+  max-width: 1080px; margin: 0 auto; padding-block: 14px; background: linear-gradient(var(--night) 70%, transparent); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--night); }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 900; font-size: 18px; color: var(--text); text-decoration: none; }
+.brand img { width: 30px; height: 30px; border-radius: 8px; }
+.lang { display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); }
+.lang button { border: 0; background: transparent; color: var(--muted); font: 700 13px var(--body); padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+
+/* Hero: the screen edge, the notch, the island opening out of it */
+.hero { display: grid; gap: 40px; justify-items: center; text-align: center; padding-top: 8px; }
+/* Room above the notch for Puff, clear of the sticky bar. */
+.screen { width: 100%; max-width: 760px; position: relative; padding-top: 72px; }
+.notch { width: 26%; height: 22px; margin: 0 auto; background: #000; border-radius: 0 0 14px 14px; position: relative; z-index: 2; }
+.island { width: 100%; margin-top: -22px; border-radius: 0 0 4.12% 4.12% / 0 0 8.19% 8.19%; overflow: hidden; background: #000;
+  box-shadow: 0 30px 80px -30px rgba(122, 189, 255, .35), 0 0 0 1px var(--line);
+  transform-origin: top center; animation: open 900ms cubic-bezier(.2, .9, .25, 1.1) 200ms both; }
+.island img { display: block; width: 100%; height: auto; }
+@keyframes open { from { clip-path: inset(0 37% 92% 37% round 0 0 18px 18px); } to { clip-path: inset(0 0 0 0 round 0 0 4% 4%); } }
+.peek { position: absolute; width: 64px; left: 50%; top: 76px; translate: -50% -100%; z-index: 3; animation: hop 2.6s ease-in-out infinite; }
+@keyframes hop { 0%, 70%, 100% { transform: translateY(0); } 80% { transform: translateY(-10px); } }
+.hero h1 { font-size: clamp(44px, 8vw, 84px); font-weight: 900; line-height: .95; }
+.hero .lede { font-size: clamp(17px, 2.2vw, 20px); margin: 0 auto; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px 18px; justify-content: center; align-items: center; }
+.button { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--accent-ink); text-decoration: none;
+  font: 900 18px var(--display); padding: 14px 26px; border-radius: 999px; transition: transform .15s ease, box-shadow .15s ease; }
+.button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(122, 189, 255, .7); }
+.button svg { width: 18px; height: 18px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.fact { font-family: var(--pixel); font-size: 11px; color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; border-radius: 6px; }
+
+/* Showcase: the island's sections */
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tabs button { border: 1px solid var(--line); background: var(--panel); color: var(--text); font: 800 15px var(--body); padding: 8px 16px; border-radius: 999px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.show { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+.show .shot { border-radius: 0 0 4.12% 4.12% / 0 0 8.19% 8.19%; overflow: hidden; box-shadow: 0 0 0 1px var(--line); background: #000; }
+.show .shot img { display: block; width: 100%; height: auto; }
+.show .text { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.show .text p { color: var(--muted); }
+
+/* Everything on the island */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.card { background: var(--panel); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.card p { color: var(--muted); font-size: 15px; }
+.card .label { margin-bottom: 4px; }
+
+/* Puff grows */
+.puffs { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; }
+.puff { display: flex; flex-direction: column; align-items: center; gap: 6px; background: var(--panel); border-radius: 18px; padding: 14px 6px 12px; }
+.puff img { width: 64px; height: 64px; }
+.puff span { font-size: 13px; color: var(--muted); text-align: center; line-height: 1.25; }
+.puff:hover img { animation: hop 0.6s ease-in-out; }
+
+/* Ukraine */
+.ua { background: linear-gradient(135deg, rgba(0, 87, 183, .22), rgba(255, 215, 0, .12)); border: 1px solid var(--line); border-radius: 28px; padding: clamp(22px, 4vw, 40px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 32px; align-items: center; }
+.ua ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.ua li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; }
+.ua li b { display: block; }
+.ua li span { color: var(--muted); font-size: 15px; }
+.dot { width: 10px; height: 10px; border-radius: 3px; background: var(--accent); margin-top: 9px; }
+.ua .shot { border-radius: 0 0 4.12% 4.12% / 0 0 8.19% 8.19%; overflow: hidden; background: #000; box-shadow: 0 0 0 1px var(--line); }
+.ua .shot img { display: block; width: 100%; height: auto; }
+
+/* Privacy */
+.privacy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 32px; align-items: start; }
+.hosts { display: grid; gap: 10px; }
+.host { background: var(--panel); border-radius: 16px; padding: 14px 16px; display: grid; gap: 2px; }
+.host b { font-size: 16px; }
+.host span { color: var(--muted); font-size: 15px; }
+
+/* Thanks and help */
+.end { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.end .card { gap: 10px; }
+.copy { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.copy code { font: 700 15px var(--body); color: var(--text); background: var(--raise); padding: 6px 10px; border-radius: 10px; user-select: all; }
+.copy button, .soon { border: 1px solid var(--line); background: var(--raise); color: var(--text); font: 700 14px var(--body); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.soon { cursor: default; color: var(--muted); }
+footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 20px; }
+
+@media (max-width: 860px) {
+  .show, .ua, .privacy { grid-template-columns: minmax(0, 1fr); }
+  .grid, .end { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .puffs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .wrap { gap: 80px; }
+}
+@media (max-width: 520px) {
+  .grid, .end { grid-template-columns: minmax(0, 1fr); }
+  .peek { width: 48px; top: 60px; }
+  .screen { padding-top: 56px; }
+  .notch { height: 14px; margin-top: 0; }
+  .island { margin-top: -14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .island, .peek, .puff:hover img { animation: none; }
+}
+</style>
+
+<header class="bar">
+  <a class="brand" href="#top"><img src="img/icon.png" alt="">Puff Island</a>
+  <nav class="lang" aria-label="Мова · Language">
+    <button type="button" data-lang="uk" aria-pressed="true">Укр</button>
+    <button type="button" data-lang="en" aria-pressed="false">Eng</button>
+  </nav>
+</header>
+
+<main class="wrap" id="top">
+  <section class="hero" aria-labelledby="title">
+    <div class="screen">
+      <img class="px peek" src="img/puff-happy.png" alt="">
+      <div class="notch" aria-hidden="true"></div>
+      <div class="island"><img data-shot="home" src="img/home-uk.jpg" alt="Відкритий острів Puff Island: світло, швидкі кнопки, годинник, календар, стан Мака і музика" width="1360" height="684"></div>
+    </div>
+    <div class="head" style="align-items:center">
+      <h1 id="title">Puff Island</h1>
+      <p class="lede" data-t="lede">Острів біля вирізу Мака, на якому живе Пуф. Наведи мишку на чубчик — і під рукою музика, таймер, календар, тривоги й графік світла.</p>
+    </div>
+    <div class="cta">
+      <a class="button" href="https://github.com/dmytromelinevskyi/Puff-releases/releases/latest/download/Puff-Island.dmg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 21h14"/></svg>
+        <span data-t="download">Завантажити для Mac</span>
+      </a>
+    </div>
+    <div class="facts">
+      <span class="fact" data-t="free">Безкоштовно</span>
+      <span class="fact">macOS 14+</span>
+      <span class="fact">Apple Silicon · Intel</span>
+      <span class="fact" data-t="signed">Підписано Apple</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="islandTitle">
+    <div class="head">
+      <span class="label" data-t="islandLabel">Острів</span>
+      <h2 id="islandTitle" data-t="islandTitle">Усе, що треба, — у вирізі над робочим столом</h2>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Розділи острова">
+      <button type="button" role="tab" aria-selected="true" data-tab="home" data-t="tabHome">Головна</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="music" data-t="tabMusic">Музика</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="timer" data-t="tabTime">Час</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="rates" data-t="tabRates">Курс НБУ</button>
+    </div>
+    <div class="show">
+      <div class="shot"><img id="showImg" src="img/home-uk.jpg" alt="" width="1360" height="684"></div>
+      <div class="text">
+        <h3 id="showTitle">Головна з блоків</h3>
+        <p id="showText">Годинник, музика, Пуф, календар, таймер, курс, світло — збери головну сам. Кожен блок буває маленьким, широким, високим або великим.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="allTitle">
+    <div class="head">
+      <span class="label" data-t="allLabel">Що вміє</span>
+      <h2 id="allTitle" data-t="allTitle">Маленький острів, багато корисного</h2>
+    </div>
+    <div class="grid">
+      <div class="card"><span class="label" data-t="c1l">Головна</span><h3 data-t="c1h">Блоки, які розставляєш сам</h3><p data-t="c1p">П’ятнадцять блоків у чотирьох розмірах: від годинника до стану батареї.</p></div>
+      <div class="card"><span class="label" data-t="c2l">Звук</span><h3 data-t="c2h">Плеєр і гучність кожної програми</h3><p data-t="c2p">Spotify і Музика, тексти пісень, окрема гучність для Zoom, браузера чи гри.</p></div>
+      <div class="card"><span class="label" data-t="c3l">Час</span><h3 data-t="c3h">Таймер, Pomodoro, зустрічі</h3><p data-t="c3p">Лінійка-таймер, найближча зустріч з календарів Google, Outlook чи iCloud, годинник світу.</p></div>
+      <div class="card"><span class="label" data-t="c4l">Файли</span><h3 data-t="c4h">Буфер, полиця, нотатки</h3><p data-t="c4p">Історія буфера обміну, полиця, куди кидаєш файли на потім, і швидкі нотатки.</p></div>
+      <div class="card"><span class="label" data-t="c5l">Мак</span><h3 data-t="c5h">⌘Tab з вікнами і швидкі дії</h3><p data-t="c5p">Перемикач вікон з усіх робочих столів, пристрої, живлення, «не засинати» в один клік.</p></div>
+      <div class="card"><span class="label" data-t="c6l">ШІ-агенти</span><h3 data-t="c6h">Claude і Codex на виду</h3><p data-t="c6p">Острів підсвічується, коли агент закінчив роботу або чекає на тебе.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="puffTitle">
+    <div class="head">
+      <span class="label" data-t="puffLabel">Пуф</span>
+      <h2 id="puffTitle" data-t="puffTitle">Пуф живе своїм життям</h2>
+      <p class="lede" data-t="puffText">Він їсть, спить, ховається під ковдру під час тривоги, слухає музику разом з тобою і росте: сорок рівнів, досягнення й гардероб.</p>
+    </div>
+    <div class="puffs">
+      <div class="puff"><img class="px" src="img/puff-happy.png" alt=""><span data-t="m1">радіє</span></div>
+      <div class="puff"><img class="px" src="img/puff-eating.png" alt=""><span data-t="m2">їсть</span></div>
+      <div class="puff"><img class="px" src="img/puff-listening.png" alt=""><span data-t="m3">слухає музику</span></div>
+      <div class="puff"><img class="px" src="img/puff-caffeinated.png" alt=""><span data-t="m4">тримає Мак без сну</span></div>
+      <div class="puff"><img class="px" src="img/puff-hiding.png" alt=""><span data-t="m5">ховається від тривоги</span></div>
+      <div class="puff"><img class="px" src="img/puff-hot.png" alt=""><span data-t="m6">Мак перегрівся</span></div>
+      <div class="puff"><img class="px" src="img/puff-racing.png" alt=""><span data-t="m7">у фокусі</span></div>
+      <div class="puff"><img class="px" src="img/puff-sleeping.png" alt=""><span data-t="m8">спить</span></div>
+      <div class="puff"><img class="px" src="img/look-king.png" alt=""><span data-t="l1">король</span></div>
+      <div class="puff"><img class="px" src="img/look-wizard.png" alt=""><span data-t="l2">чарівник</span></div>
+      <div class="puff"><img class="px" src="img/look-surfer.png" alt=""><span data-t="l3">серфер</span></div>
+      <div class="puff"><img class="px" src="img/look-panda.png" alt=""><span data-t="l4">панда</span></div>
+      <div class="puff"><img class="px" src="img/look-cyber.png" alt=""><span data-t="l5">кіберпуф</span></div>
+      <div class="puff"><img class="px" src="img/look-santa.png" alt=""><span data-t="l6">Санта</span></div>
+      <div class="puff"><img class="px" src="img/look-unicorn.png" alt=""><span data-t="l7">єдиноріг</span></div>
+      <div class="puff"><img class="px" src="img/look-dragon.png" alt=""><span data-t="l8">дракон</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="uaTitle">
+    <div class="ua">
+      <div class="head">
+        <span class="label" data-t="uaLabel">Україна</span>
+        <h2 id="uaTitle" data-t="uaTitle">Зроблено в Україні — і для України</h2>
+        <ul>
+          <li><span class="dot"></span><div><b data-t="u1h">Повітряні тривоги</b><span data-t="u1p">Острів світиться червоним, коли в твоїй області тривога, і зеленим на відбій.</span></div></li>
+          <li><span class="dot"></span><div><b data-t="u2h">Графіки відключень</b><span data-t="u2p">Коли зникне й повернеться світло за твоєю адресою — у Києві, Дніпрі, Одесі та інших містах.</span></div></li>
+          <li><span class="dot"></span><div><b data-t="u3h">Курс НБУ</b><span data-t="u3p">Будь-яка валюта на будь-який день з 1996 року, зміна за день і графік за місяць.</span></div></li>
+          <li><span class="dot"></span><div><b data-t="u4h">Податки ФОП</b><span data-t="u4p">Пуф нагадає про єдиний податок, військовий збір і ЄСВ за п’ять днів до строку.</span></div></li>
+        </ul>
+      </div>
+      <div class="shot"><img data-shot="rates" src="img/rates-uk.jpg" alt="Вкладка «Курс НБУ» на острові" width="1360" height="684"></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="privacyTitle" class="privacy">
+    <div class="head">
+      <span class="label" data-t="privLabel">Приватність</span>
+      <h2 id="privacyTitle" data-t="privTitle">Твоє лишається на твоєму Маку</h2>
+      <p class="lede" data-t="privText">Улюбленець, нотатки, буфер обміну й налаштування зберігаються лише на цьому Маку. Без реєстрації, статистики й реклами. В інтернет Пуф ходить тільки сюди:</p>
+    </div>
+    <div class="hosts">
+      <div class="host"><b data-t="h1h">Оновлення</b><span data-t="h1p">GitHub: чи вийшла нова версія. Про тебе нічого не передається.</span></div>
+      <div class="host"><b data-t="h2h">Тривоги</b><span data-t="h2p">siren.pp.ua та ubilling.net.ua: загальний список тривог. Твоя область лишається на Маку.</span></div>
+      <div class="host"><b data-t="h3h">Світло</b><span data-t="h3p">YASNO отримує вулицю й будинок, які ти вказав, щоб надіслати графік.</span></div>
+      <div class="host"><b data-t="h4h">Тексти пісень і обкладинки</b><span data-t="h4p">lrclib.net та iTunes отримують назву пісні й виконавця.</span></div>
+      <div class="host"><b data-t="h5h">Курс валют</b><span data-t="h5p">bank.gov.ua: офіційний курс НБУ.</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="endTitle">
+    <div class="head">
+      <span class="label" data-t="endLabel">Безкоштовно</span>
+      <h2 id="endTitle" data-t="endTitle">Пуф безкоштовний. Назавжди.</h2>
+    </div>
+    <div class="end">
+      <div class="card">
+        <h3 data-t="e1h">Встановити</h3>
+        <p data-t="e1p">Завантаж Puff-Island.dmg, відкрий і перетягни Пуфа в «Програми». Оновлення Пуф пропонує сам.</p>
+        <a class="button" style="align-self:flex-start;font-size:15px;padding:10px 18px" href="https://github.com/dmytromelinevskyi/Puff-releases/releases/latest/download/Puff-Island.dmg" data-t="download">Завантажити для Mac</a>
+      </div>
+      <div class="card">
+        <h3 data-t="e2h">Подякувати</h3>
+        <p data-t="e2p">Без платної версії й підписок. Якщо Пуф тобі допомагає — можна задонатити.</p>
+        <span class="soon" style="align-self:flex-start" data-t="soon">Банка скоро з’явиться</span>
+      </div>
+      <div class="card">
+        <h3 data-t="e3h">Щось не так?</h3>
+        <p data-t="e3p">Напиши нам — або натисни «Повідомити про проблему» в налаштуваннях Пуфа.</p>
+        <div class="copy"><code id="mail">dibslysupport@gmail.com</code><button type="button" id="copyMail" data-t="copy">Копіювати</button></div>
+      </div>
+    </div>
+    <footer>
+      <span>Puff Island · <span data-t="made">зроблено в Україні</span></span>
+      <a href="https://github.com/dmytromelinevskyi/Puff-releases/releases" data-t="releases">Усі версії на GitHub</a>
+    </footer>
+  </section>
+</main>
+
+<script>
+const text = {
+  uk: {
+    lede: "Острів біля вирізу Мака, на якому живе Пуф. Наведи мишку на чубчик — і під рукою музика, таймер, календар, тривоги й графік світла.",
+    download: "Завантажити для Mac", free: "Безкоштовно", signed: "Підписано Apple",
+    islandLabel: "Острів", islandTitle: "Усе, що треба, — у вирізі над робочим столом",
+    tabHome: "Головна", tabMusic: "Музика", tabTime: "Час", tabRates: "Курс НБУ",
+    allLabel: "Що вміє", allTitle: "Маленький острів, багато корисного",
+    c1l: "Головна", c1h: "Блоки, які розставляєш сам", c1p: "П’ятнадцять блоків у чотирьох розмірах: від годинника до стану батареї.",
+    c2l: "Звук", c2h: "Плеєр і гучність кожної програми", c2p: "Spotify і Музика, тексти пісень, окрема гучність для Zoom, браузера чи гри.",
+    c3l: "Час", c3h: "Таймер, Pomodoro, зустрічі", c3p: "Лінійка-таймер, найближча зустріч з календарів Google, Outlook чи iCloud, годинник світу.",
+    c4l: "Файли", c4h: "Буфер, полиця, нотатки", c4p: "Історія буфера обміну, полиця, куди кидаєш файли на потім, і швидкі нотатки.",
+    c5l: "Мак", c5h: "⌘Tab з вікнами і швидкі дії", c5p: "Перемикач вікон з усіх робочих столів, пристрої, живлення, «не засинати» в один клік.",
+    c6l: "ШІ-агенти", c6h: "Claude і Codex на виду", c6p: "Острів підсвічується, коли агент закінчив роботу або чекає на тебе.",
+    puffLabel: "Пуф", puffTitle: "Пуф живе своїм життям",
+    puffText: "Він їсть, спить, ховається під ковдру під час тривоги, слухає музику разом з тобою і росте: сорок рівнів, досягнення й гардероб.",
+    m1: "радіє", m2: "їсть", m3: "слухає музику", m4: "тримає Мак без сну", m5: "ховається від тривоги", m6: "Мак перегрівся", m7: "у фокусі", m8: "спить",
+    l1: "король", l2: "чарівник", l3: "серфер", l4: "панда", l5: "кіберпуф", l6: "Санта", l7: "єдиноріг", l8: "дракон",
+    uaLabel: "Україна", uaTitle: "Зроблено в Україні — і для України",
+    u1h: "Повітряні тривоги", u1p: "Острів світиться червоним, коли в твоїй області тривога, і зеленим на відбій.",
+    u2h: "Графіки відключень", u2p: "Коли зникне й повернеться світло за твоєю адресою — у Києві, Дніпрі, Одесі та інших містах.",
+    u3h: "Курс НБУ", u3p: "Будь-яка валюта на будь-який день з 1996 року, зміна за день і графік за місяць.",
+    u4h: "Податки ФОП", u4p: "Пуф нагадає про єдиний податок, військовий збір і ЄСВ за п’ять днів до строку.",
+    privLabel: "Приватність", privTitle: "Твоє лишається на твоєму Маку",
+    privText: "Улюбленець, нотатки, буфер обміну й налаштування зберігаються лише на цьому Маку. Без реєстрації, статистики й реклами. В інтернет Пуф ходить тільки сюди:",
+    h1h: "Оновлення", h1p: "GitHub: чи вийшла нова версія. Про тебе нічого не передається.",
+    h2h: "Тривоги", h2p: "siren.pp.ua та ubilling.net.ua: загальний список тривог. Твоя область лишається на Маку.",
+    h3h: "Світло", h3p: "YASNO отримує вулицю й будинок, які ти вказав, щоб надіслати графік.",
+    h4h: "Тексти пісень і обкладинки", h4p: "lrclib.net та iTunes отримують назву пісні й виконавця.",
+    h5h: "Курс валют", h5p: "bank.gov.ua: офіційний курс НБУ.",
+    endLabel: "Безкоштовно", endTitle: "Пуф безкоштовний. Назавжди.",
+    e1h: "Встановити", e1p: "Завантаж Puff-Island.dmg, відкрий і перетягни Пуфа в «Програми». Оновлення Пуф пропонує сам.",
+    e2h: "Подякувати", e2p: "Без платної версії й підписок. Якщо Пуф тобі допомагає — можна задонатити.", soon: "Банка скоро з’явиться",
+    e3h: "Щось не так?", e3p: "Напиши нам — або натисни «Повідомити про проблему» в налаштуваннях Пуфа.",
+    copy: "Копіювати", copied: "Скопійовано", made: "зроблено в Україні", releases: "Усі версії на GitHub",
+    shows: {
+      home: ["Головна з блоків", "Годинник, музика, Пуф, календар, таймер, курс, світло — збери головну сам. Кожен блок буває маленьким, широким, високим або великим."],
+      music: ["Музика без перемикання вікон", "Що грає в Spotify чи Музиці, перемотка, гучність, вихід звуку і текст пісні, що біжить разом із треком."],
+      timer: ["Таймер-лінійка", "Протягни до потрібної хвилини і натисни «Старт». Є Pomodoro, секундомір, події з календаря і годинник світу."],
+      rates: ["Курс НБУ на будь-який день", "Обери валюту й дату — від 1996 року до завтра. Зміна за день і графік за останній місяць."]
+    }
+  },
+  en: {
+    lede: "An island at your Mac’s notch, and Puff lives on it. Move the mouse to the notch for music, a timer, your calendar, air-raid alerts and power schedules.",
+    download: "Download for Mac", free: "Free", signed: "Signed by Apple",
+    islandLabel: "The island", islandTitle: "What you need, right in the notch above your desktop",
+    tabHome: "Home", tabMusic: "Music", tabTime: "Time", tabRates: "NBU rates",
+    allLabel: "What it does", allTitle: "A small island with a lot on it",
+    c1l: "Home", c1h: "Blocks you arrange yourself", c1p: "Fifteen blocks in four sizes, from a clock to your battery level.",
+    c2l: "Sound", c2h: "A player and volume for each app", c2p: "Spotify and Music, lyrics, separate volume for Zoom, your browser or a game.",
+    c3l: "Time", c3h: "Timer, Pomodoro, meetings", c3p: "A ruler timer, your next meeting from Google, Outlook or iCloud calendars, world clocks.",
+    c4l: "Files", c4h: "Clipboard, shelf, notes", c4p: "Clipboard history, a shelf to drop files on for later, and quick notes.",
+    c5l: "Mac", c5h: "⌘Tab with windows and quick actions", c5p: "A switcher with windows from every desktop, devices, power, keep-awake in one click.",
+    c6l: "AI agents", c6h: "Claude and Codex in sight", c6p: "The island lights up when an agent finishes or is waiting for you.",
+    puffLabel: "Puff", puffTitle: "Puff has a life of his own",
+    puffText: "He eats, sleeps, hides under a blanket during an alert, listens to music with you and grows: forty levels, achievements and a wardrobe.",
+    m1: "happy", m2: "eating", m3: "listening", m4: "keeping the Mac awake", m5: "hiding from an alert", m6: "the Mac is hot", m7: "in focus", m8: "asleep",
+    l1: "king", l2: "wizard", l3: "surfer", l4: "panda", l5: "cyber Puff", l6: "Santa", l7: "unicorn", l8: "dragon",
+    uaLabel: "Ukraine", uaTitle: "Made in Ukraine, for Ukraine",
+    u1h: "Air-raid alerts", u1p: "The island glows red when there is an alert in your region and green when it ends.",
+    u2h: "Power outage schedules", u2p: "When the power goes out and comes back at your address, in Kyiv, Dnipro, Odesa and other cities.",
+    u3h: "NBU exchange rates", u3p: "Any currency on any day since 1996, the change in a day and the month as a chart.",
+    u4h: "Sole-proprietor taxes", u4p: "Puff reminds you about the single tax, military levy and social contribution five days before the deadline.",
+    privLabel: "Privacy", privTitle: "Yours stays on your Mac",
+    privText: "The pet, notes, clipboard and settings are kept only on this Mac. No sign-up, no statistics, no ads. Puff goes online only for this:",
+    h1h: "Updates", h1p: "GitHub: whether a new version is out. Nothing about you is sent.",
+    h2h: "Alerts", h2p: "siren.pp.ua and ubilling.net.ua: the list of alerts. Your region stays on your Mac.",
+    h3h: "Power", h3p: "YASNO gets the street and house you entered, to send the schedule.",
+    h4h: "Lyrics and covers", h4p: "lrclib.net and iTunes get the song title and artist.",
+    h5h: "Exchange rates", h5p: "bank.gov.ua: the official NBU rate.",
+    endLabel: "Free", endTitle: "Puff is free. For good.",
+    e1h: "Install", e1p: "Download Puff-Island.dmg, open it and drag Puff to Applications. Puff offers updates himself.",
+    e2h: "Say thanks", e2p: "No paid version, no subscriptions. If Puff helps you, you can donate.", soon: "Donations coming soon",
+    e3h: "Something wrong?", e3p: "Write to us, or click “Report a Problem” in Puff’s settings.",
+    copy: "Copy", copied: "Copied", made: "made in Ukraine", releases: "All versions on GitHub",
+    shows: {
+      home: ["Home, built from blocks", "Clock, music, Puff, calendar, timer, rates, power: arrange Home yourself. Every block comes small, wide, tall or large."],
+      music: ["Music without switching windows", "What’s playing in Spotify or Music, seeking, volume, audio output and lyrics that scroll with the song."],
+      timer: ["A ruler timer", "Drag to the minute you want and press Start. There’s Pomodoro, a stopwatch, calendar events and world clocks."],
+      rates: ["NBU rates for any day", "Pick a currency and a date, from 1996 to tomorrow. The change in a day and a chart of the last month."]
+    }
+  }
+};
+
+let lang = "uk";
+let tab = "home";
+
+function showTab(name) {
+  tab = name;
+  document.querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === name)));
+  document.getElementById("showImg").src = `img/${name}-${lang}.jpg`;
+  const [title, body] = text[lang].shows[name];
+  document.getElementById("showTitle").textContent = title;
+  document.getElementById("showText").textContent = body;
+  document.getElementById("showImg").alt = title;
+}
+
+function setLang(next) {
+  lang = next;
+  document.documentElement.lang = next;
+  document.querySelectorAll("[data-t]").forEach(el => { const v = text[next][el.dataset.t]; if (v) el.textContent = v; });
+  document.querySelectorAll("[data-shot]").forEach(img => { img.src = `img/${img.dataset.shot}-${next}.jpg`; });
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === next)));
+  showTab(tab);
+}
+
+document.querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
+  setLang(b.dataset.lang);
+  history.replaceState(null, "", "#" + b.dataset.lang);
+}));
+document.getElementById("copyMail").addEventListener("click", async (event) => {
+  const button = event.currentTarget;
+  try {
+    await navigator.clipboard.writeText(document.getElementById("mail").textContent);
+    button.textContent = text[lang].copied;
+    setTimeout(() => { button.textContent = text[lang].copy; }, 1500);
+  } catch {
+    const range = document.createRange();
+    range.selectNodeContents(document.getElementById("mail"));
+    getSelection().removeAllRanges();
+    getSelection().addRange(range);
+  }
+});
+
+const fromHash = location.hash.replace("#", "");
+const fromBrowser = (navigator.language || "").toLowerCase().startsWith("uk") ? "uk" : "en";
+setLang(fromHash === "en" || fromHash === "uk" ? fromHash : fromBrowser);
+window.addEventListener("hashchange", () => {
+  const next = location.hash.replace("#", "");
+  if (next === "en" || next === "uk") setLang(next);
+});
+</script>
