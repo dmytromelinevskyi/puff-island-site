@@ -1,5 +1,13 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="img/icon.png">
+<meta property="og:title" content="Puff Island">
+<meta property="og:description" content="Острів біля вирізу Мака, на якому живе Пуф. Безкоштовно для macOS.">
+<meta property="og:image" content="https://dmytromelinevskyi.github.io/puff-island-site/img/tabs/home-uk.jpg">
 <title>Puff Island</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Острів біля вирізу Мака, на якому живе Пуф. Безкоштовно для macOS.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +30,9 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
 body {
+  margin: 0;
   background: var(--night); color: var(--text); font-family: var(--body); font-size: 17px; line-height: 1.55;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   -webkit-font-smoothing: antialiased;
@@ -74,6 +84,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Showcase: the island's sections */
 .tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.subtabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 999px; background: var(--panel); align-self: flex-start; max-width: 100%; }
+.subtabs button { border: 0; background: transparent; color: var(--muted); font: 800 14px var(--body); padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+.subtabs button[aria-selected="true"] { background: var(--raise); color: var(--text); }
 .tabs button { border: 1px solid var(--line); background: var(--panel); color: var(--text); font: 800 15px var(--body); padding: 8px 16px; border-radius: 999px; cursor: pointer; }
 .tabs button[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
 .show { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 32px; align-items: center; }
@@ -81,6 +94,20 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .show .shot img { display: block; width: 100%; height: auto; }
 .show .text { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .show .text p { color: var(--muted); }
+
+/* The closed island */
+.closed { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.moment { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.moment img { display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 0 0 1px var(--line); }
+.moment b { font-size: 16px; }
+.moment span { color: var(--muted); font-size: 15px; }
+
+/* Mac extras */
+.extras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.extra { background: var(--panel); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.extra p { color: var(--muted); font-size: 15px; }
+.keys { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+kbd { font: 700 13px var(--body); color: var(--text); background: var(--raise); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 7px; padding: 1px 7px; }
 
 /* Everything on the island */
 .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
@@ -123,12 +150,12 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
 
 @media (max-width: 860px) {
   .show, .ua, .privacy { grid-template-columns: minmax(0, 1fr); }
-  .grid, .end { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid, .end, .closed, .extras { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .puffs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .wrap { gap: 80px; }
 }
 @media (max-width: 520px) {
-  .grid, .end { grid-template-columns: minmax(0, 1fr); }
+  .grid, .end, .closed, .extras { grid-template-columns: minmax(0, 1fr); }
   .peek { width: 48px; top: 60px; }
   .screen { padding-top: 56px; }
   .notch { height: 14px; margin-top: 0; }
@@ -138,6 +165,8 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
   .island, .peek, .puff:hover img { animation: none; }
 }
 </style>
+</head>
+<body>
 
 <header class="bar">
   <a class="brand" href="#top"><img src="img/icon.png" alt="">Puff Island</a>
@@ -152,7 +181,7 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
     <div class="screen">
       <img class="px peek" src="img/puff-happy.png" alt="">
       <div class="notch" aria-hidden="true"></div>
-      <div class="island"><img data-shot="home" src="img/home-uk.jpg" alt="Відкритий острів Puff Island: світло, швидкі кнопки, годинник, календар, стан Мака і музика" width="1360" height="684"></div>
+      <div class="island"><img data-shot="home" src="img/tabs/home-uk.jpg" alt="Відкритий острів Puff Island: світло, швидкі кнопки, годинник, календар, стан Мака і музика" width="1360" height="684"></div>
     </div>
     <div class="head" style="align-items:center">
       <h1 id="title">Puff Island</h1>
@@ -177,18 +206,52 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
       <span class="label" data-t="islandLabel">Острів</span>
       <h2 id="islandTitle" data-t="islandTitle">Усе, що треба, — у вирізі над робочим столом</h2>
     </div>
-    <div class="tabs" role="tablist" aria-label="Розділи острова">
-      <button type="button" role="tab" aria-selected="true" data-tab="home" data-t="tabHome">Головна</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="music" data-t="tabMusic">Музика</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="timer" data-t="tabTime">Час</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="rates" data-t="tabRates">Курс НБУ</button>
-    </div>
+    <div class="tabs" role="tablist" aria-label="Розділи острова" id="sections"></div>
+    <div class="subtabs" role="tablist" aria-label="Вкладки розділу" id="subtabs"></div>
     <div class="show">
-      <div class="shot"><img id="showImg" src="img/home-uk.jpg" alt="" width="1360" height="684"></div>
+      <div class="shot"><img id="showImg" src="img/tabs/home-uk.jpg" alt="" width="1360" height="684"></div>
       <div class="text">
         <h3 id="showTitle">Головна з блоків</h3>
-        <p id="showText">Годинник, музика, Пуф, календар, таймер, курс, світло — збери головну сам. Кожен блок буває маленьким, широким, високим або великим.</p>
+        <p id="showText">Світло, швидкі кнопки, годинник, календар, стан Мака, музика — збери головну сам. Кожен блок буває маленьким, широким, високим або великим.</p>
       </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="closedTitle">
+    <div class="head">
+      <span class="label" data-t="closedLabel">Закритий острів</span>
+      <h2 id="closedTitle" data-t="closedTitle">Навіть закритий, острів показує головне</h2>
+      <p class="lede" data-t="closedText">Біля вирізу живе Пуф, а поруч з’являється те, що відбувається зараз. Відкривати нічого не треба.</p>
+    </div>
+    <div class="closed">
+      <div class="moment"><img data-closed="music" src="img/closed/closed-music-uk.jpg" alt="" width="1200" height="168"><b data-t="k1h">Грає музика</b><span data-t="k1p">Обкладинка й еквалайзер у кольорі пісні.</span></div>
+      <div class="moment"><img data-closed="alert" src="img/closed/closed-alert-uk.jpg" alt="" width="1200" height="168"><b data-t="k2h">Повітряна тривога</b><span data-t="k2p">Острів пульсує червоним, Пуф ховається під ковдру. На відбій — зелений.</span></div>
+      <div class="moment"><img data-closed="claude" src="img/closed/closed-claude-uk.jpg" alt="" width="1200" height="168"><b data-t="k3h">Claude працює</b><span data-t="k3p">Скільки агентів зайнято і як довго. Закінчать — острів підморгне.</span></div>
+      <div class="moment"><img data-closed="waiting" src="img/closed/closed-waiting-uk.jpg" alt="" width="1200" height="168"><b data-t="k4h">Claude чекає на тебе</b><span data-t="k4p">Жовтим, коли агенту потрібна твоя відповідь.</span></div>
+      <div class="moment"><img data-closed="timer" src="img/closed/closed-timer-uk.jpg" alt="" width="1200" height="168"><b data-t="k5h">Pomodoro</b><span data-t="k5p">Скільки лишилося до перерви, видно краєм ока.</span></div>
+      <div class="moment"><img data-closed="idle" src="img/closed/closed-idle-uk.jpg" alt="" width="1200" height="168"><b data-t="k6h">Тиша</b><span data-t="k6p">Коли нічого не відбувається, біля вирізу лише Пуф.</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="extrasTitle">
+    <div class="head">
+      <span class="label" data-t="extrasLabel">Для Мака</span>
+      <h2 id="extrasTitle" data-t="extrasTitle">Дрібниці, яких бракує в macOS</h2>
+      <p class="lede" data-t="extrasText">Кожну можна ввімкнути або вимкнути в налаштуваннях Пуфа.</p>
+    </div>
+    <div class="extras">
+      <div class="extra"><h3 data-t="x1h">Текст з екрана</h3><p data-t="x1p">Виділи будь-що на екрані — картинку, відео, скан — і текст з нього одразу в буфері.</p><div class="keys"><kbd>⇧</kbd><kbd>⌘</kbd><kbd>1</kbd></div></div>
+      <div class="extra"><h3 data-t="x2h">Скриншоти без затримки</h3><p data-t="x2p">Скриншот потрапляє в буфер одразу, без п’ятисекундного прев’ю в кутку, і зберігається в історії.</p></div>
+      <div class="extra"><h3 data-t="x3h">Клік по Доку згортає</h3><p data-t="x3p">Як у Windows: клікни по іконці програми, в якій працюєш, — вона згорнеться або сховається. Ще клік — повернеться.</p></div>
+      <div class="extra"><h3 data-t="x4h">⌘Tab з вікнами</h3><p data-t="x4p">Перемикач показує кожне вікно з картинкою, з усіх робочих столів і згорнуті. А при наведенні на іконку в Доці — вікна цієї програми.</p><div class="keys"><kbd>⌘</kbd><kbd>Tab</kbd></div></div>
+      <div class="extra"><h3 data-t="x5h">Командний рядок</h3><p data-t="x5p">Програми, пошук, калькулятор і курси валют в одному полі.</p><div class="keys"><kbd>⌥</kbd><kbd data-t="space">Пробіл</kbd></div></div>
+      <div class="extra"><h3 data-t="x6h">Піпетка і правка картинок</h3><p data-t="x6p">Колір з будь-якого місця екрана — в HEX у буфер. Картинку з буфера можна обрізати й підписати.</p><div class="keys"><kbd>⇧</kbd><kbd>⌘</kbd><kbd>2</kbd></div></div>
+      <div class="extra"><h3 data-t="x7h">Вибір браузера для посилань</h3><p data-t="x7p">Посилання з Telegram чи Slack — у потрібний браузер або профіль Chrome: «Особистий», «Робочий».</p></div>
+      <div class="extra"><h3 data-t="x8h">Вирізати й вставити файли</h3><p data-t="x8p">⌘X і ⌘V у Finder переносять файли, як у Windows.</p><div class="keys"><kbd>⌘</kbd><kbd>X</kbd><kbd>⌘</kbd><kbd>V</kbd></div></div>
+      <div class="extra"><h3 data-t="x9h">⌘Q тільки утриманням</h3><p data-t="x9p">Програма не закриється від випадкового натискання.</p></div>
+      <div class="extra"><h3 data-t="x10h">Сніпети</h3><p data-t="x10p">Короткі скорочення розгортаються в повний текст, поки друкуєш: адреса, реквізити, шаблон листа.</p></div>
+      <div class="extra"><h3 data-t="x11h">Видалення програм начисто</h3><p data-t="x11p">Разом із налаштуваннями, кешем і рештками в Бібліотеці.</p></div>
+      <div class="extra"><h3 data-t="x12h">Яскравість і Bluetooth</h3><p data-t="x12p">Клавіші яскравості керують зовнішнім монітором під мишкою. Bluetooth вимикається, поки Мак спить, а «Музика» не запускається сама.</p></div>
     </div>
   </section>
 
@@ -245,7 +308,7 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
           <li><span class="dot"></span><div><b data-t="u4h">Податки ФОП</b><span data-t="u4p">Пуф нагадає про єдиний податок, військовий збір і ЄСВ за п’ять днів до строку.</span></div></li>
         </ul>
       </div>
-      <div class="shot"><img data-shot="rates" src="img/rates-uk.jpg" alt="Вкладка «Курс НБУ» на острові" width="1360" height="684"></div>
+      <div class="shot"><img data-shot="rates" src="img/tabs/rates-uk.jpg" alt="Вкладка «Курс НБУ» на острові" width="1360" height="684"></div>
     </div>
   </section>
 
@@ -328,12 +391,27 @@ const text = {
     e2h: "Подякувати", e2p: "Без платної версії й підписок. Якщо Пуф тобі допомагає — можна задонатити.", soon: "Банка скоро з’явиться",
     e3h: "Щось не так?", e3p: "Напиши нам — або натисни «Повідомити про проблему» в налаштуваннях Пуфа.",
     copy: "Копіювати", copied: "Скопійовано", made: "зроблено в Україні", releases: "Усі версії на GitHub",
-    shows: {
-      home: ["Головна з блоків", "Годинник, музика, Пуф, календар, таймер, курс, світло — збери головну сам. Кожен блок буває маленьким, широким, високим або великим."],
-      music: ["Музика без перемикання вікон", "Що грає в Spotify чи Музиці, перемотка, гучність, вихід звуку і текст пісні, що біжить разом із треком."],
-      timer: ["Таймер-лінійка", "Протягни до потрібної хвилини і натисни «Старт». Є Pomodoro, секундомір, події з календаря і годинник світу."],
-      rates: ["Курс НБУ на будь-який день", "Обери валюту й дату — від 1996 року до завтра. Зміна за день і графік за останній місяць."]
-    }
+    closedLabel: "Закритий острів", closedTitle: "Навіть закритий, острів показує головне",
+    closedText: "Біля вирізу живе Пуф, а поруч з’являється те, що відбувається зараз. Відкривати нічого не треба.",
+    k1h: "Грає музика", k1p: "Обкладинка й еквалайзер у кольорі пісні.",
+    k2h: "Повітряна тривога", k2p: "Острів пульсує червоним, Пуф ховається під ковдру. На відбій — зелений.",
+    k3h: "Claude працює", k3p: "Скільки агентів зайнято і як довго. Закінчать — острів підморгне.",
+    k4h: "Claude чекає на тебе", k4p: "Жовтим, коли агенту потрібна твоя відповідь.",
+    k5h: "Pomodoro", k5p: "Скільки лишилося до перерви, видно краєм ока.",
+    k6h: "Тиша", k6p: "Коли нічого не відбувається, біля вирізу лише Пуф.",
+    extrasLabel: "Для Мака", extrasTitle: "Дрібниці, яких бракує в macOS", extrasText: "Кожну можна ввімкнути або вимкнути в налаштуваннях Пуфа.",
+    x1h: "Текст з екрана", x1p: "Виділи будь-що на екрані — картинку, відео, скан — і текст з нього одразу в буфері.",
+    x2h: "Скриншоти без затримки", x2p: "Скриншот потрапляє в буфер одразу, без п’ятисекундного прев’ю в кутку, і зберігається в історії.",
+    x3h: "Клік по Доку згортає", x3p: "Як у Windows: клікни по іконці програми, в якій працюєш, — вона згорнеться або сховається. Ще клік — повернеться.",
+    x4h: "⌘Tab з вікнами", x4p: "Перемикач показує кожне вікно з картинкою, з усіх робочих столів і згорнуті. А при наведенні на іконку в Доці — вікна цієї програми.",
+    x5h: "Командний рядок", x5p: "Програми, пошук, калькулятор і курси валют в одному полі.", space: "Пробіл",
+    x6h: "Піпетка і правка картинок", x6p: "Колір з будь-якого місця екрана — в HEX у буфер. Картинку з буфера можна обрізати й підписати.",
+    x7h: "Вибір браузера для посилань", x7p: "Посилання з Telegram чи Slack — у потрібний браузер або профіль Chrome: «Особистий», «Робочий».",
+    x8h: "Вирізати й вставити файли", x8p: "⌘X і ⌘V у Finder переносять файли, як у Windows.",
+    x9h: "⌘Q тільки утриманням", x9p: "Програма не закриється від випадкового натискання.",
+    x10h: "Сніпети", x10p: "Короткі скорочення розгортаються в повний текст, поки друкуєш: адреса, реквізити, шаблон листа.",
+    x11h: "Видалення програм начисто", x11p: "Разом із налаштуваннями, кешем і рештками в Бібліотеці.",
+    x12h: "Яскравість і Bluetooth", x12p: "Клавіші яскравості керують зовнішнім монітором під мишкою. Bluetooth вимикається, поки Мак спить, а «Музика» не запускається сама."
   },
   en: {
     lede: "An island at your Mac’s notch, and Puff lives on it. Move the mouse to the notch for music, a timer, your calendar, air-raid alerts and power schedules.",
@@ -368,38 +446,120 @@ const text = {
     e2h: "Say thanks", e2p: "No paid version, no subscriptions. If Puff helps you, you can donate.", soon: "Donations coming soon",
     e3h: "Something wrong?", e3p: "Write to us, or click “Report a Problem” in Puff’s settings.",
     copy: "Copy", copied: "Copied", made: "made in Ukraine", releases: "All versions on GitHub",
-    shows: {
-      home: ["Home, built from blocks", "Clock, music, Puff, calendar, timer, rates, power: arrange Home yourself. Every block comes small, wide, tall or large."],
-      music: ["Music without switching windows", "What’s playing in Spotify or Music, seeking, volume, audio output and lyrics that scroll with the song."],
-      timer: ["A ruler timer", "Drag to the minute you want and press Start. There’s Pomodoro, a stopwatch, calendar events and world clocks."],
-      rates: ["NBU rates for any day", "Pick a currency and a date, from 1996 to tomorrow. The change in a day and a chart of the last month."]
-    }
+    closedLabel: "The closed island", closedTitle: "Even closed, the island shows what matters",
+    closedText: "Puff lives by the notch, and whatever is going on right now appears next to him. No need to open anything.",
+    k1h: "Music playing", k1p: "The cover and an equalizer in the song’s colour.",
+    k2h: "Air-raid alert", k2p: "The island pulses red and Puff hides under a blanket. Green when it’s over.",
+    k3h: "Claude at work", k3p: "How many agents are busy and for how long. When they finish, the island winks.",
+    k4h: "Claude is waiting", k4p: "In yellow, when an agent needs your answer.",
+    k5h: "Pomodoro", k5p: "Time left until the break, at a glance.",
+    k6h: "Quiet", k6p: "When nothing is going on, it’s just Puff by the notch.",
+    extrasLabel: "For your Mac", extrasTitle: "Small things macOS is missing", extrasText: "Each one can be turned on or off in Puff’s settings.",
+    x1h: "Text from the screen", x1p: "Select anything on screen — a picture, a video, a scan — and its text is on your clipboard.",
+    x2h: "Instant screenshots", x2p: "Screenshots go straight to the clipboard, without the five-second preview in the corner, and stay in the history.",
+    x3h: "Click the Dock to minimize", x3p: "Like Windows: click the icon of the app you’re in and it minimizes or hides. Click again to bring it back.",
+    x4h: "⌘Tab with windows", x4p: "The switcher shows every window with a picture, from every desktop, minimized ones too. Hover a Dock icon to see that app’s windows.",
+    x5h: "Command bar", x5p: "Apps, search, a calculator and exchange rates in one field.", space: "Space",
+    x6h: "Color picker and image edits", x6p: "Any color on screen goes to the clipboard as HEX. Crop and annotate the image on your clipboard.",
+    x7h: "Pick a browser for links", x7p: "Links from Telegram or Slack open in the browser or Chrome profile you want: “Personal”, “Work”.",
+    x8h: "Cut and paste files", x8p: "⌘X and ⌘V in Finder move files, like on Windows.",
+    x9h: "Hold ⌘Q to quit", x9p: "No more closing an app by accident.",
+    x10h: "Snippets", x10p: "Short abbreviations expand into full text as you type: an address, bank details, an email template.",
+    x11h: "Uninstall apps cleanly", x11p: "Along with their settings, caches and leftovers in Library.",
+    x12h: "Brightness and Bluetooth", x12p: "Brightness keys control the external display under the mouse. Bluetooth turns off while the Mac sleeps, and Music no longer starts on its own."
   }
 };
 
-let lang = "uk";
-let tab = "home";
+const sections = [
+  { id: "home", uk: "Головна", en: "Home", tabs: [
+    { id: "home", uk: ["Головна", "Головна з блоків", "Світло, швидкі кнопки, годинник, календар, стан Мака, музика — збери головну сам. Кожен блок буває маленьким, широким, високим або великим."],
+      en: ["Home", "Home, built from blocks", "Power, quick buttons, clock, calendar, Mac status, music: arrange Home yourself. Every block comes small, wide, tall or large."] } ] },
+  { id: "puff", uk: "Пуф", en: "Puff", tabs: [
+    { id: "pet", uk: ["Турбота", "Турбота про Пуфа", "Нагодуй, погладь, пограй або відправ Пуфа на квест: 25 хвилин фокусу без відволікань."], en: ["Care", "Taking care of Puff", "Feed him, pet him, play, or send Puff on a quest: 25 minutes of focus without distractions."] },
+    { id: "wardrobe", uk: ["Гардероб", "Шапки й костюми", "Вбрання відкриваються за рівні й досягнення. Пуф носить їх і на острові, і на робочому столі."], en: ["Wardrobe", "Hats and costumes", "Outfits unlock with levels and achievements. Puff wears them on the island and on the desktop."] },
+    { id: "levels", uk: ["Рівні", "Сорок рівнів", "Кожен рівень відкриває новий образ: за фокус, музику, ігри та інші справи з Пуфом."], en: ["Levels", "Forty levels", "Each level unlocks a new look: for focus, music, games and other things you do with Puff."] },
+    { id: "games", uk: ["Ігри", "П’ять міні-ігор", "Ловити смаколики, знайти пару, стрибки, реакція і змійка — прямо в острові. Рекорди піднімають Пуфу настрій."], en: ["Games", "Five mini games", "Catch the treats, find the pair, jumps, reaction and snake, right in the island. Records cheer Puff up."] } ] },
+  { id: "sound", uk: "Звук", en: "Sound", tabs: [
+    { id: "music", uk: ["Музика", "Музика без перемикання вікон", "Що грає в Spotify чи Музиці, перемотка, гучність, вихід звуку і текст пісні, що біжить разом із треком."], en: ["Music", "Music without switching windows", "What’s playing in Spotify or Music, seeking, volume, audio output and lyrics that scroll with the song."] },
+    { id: "sound", uk: ["Гучність", "Гучність кожної програми", "Притиш браузер, залиш голосніше Zoom. Вихід, мікрофон і системні звуки — тут же."], en: ["Volume", "Volume for each app", "Turn the browser down and keep Zoom louder. Output, microphone and system sounds are here too."] } ] },
+  { id: "time", uk: "Час", en: "Time", tabs: [
+    { id: "timer", uk: ["Таймер", "Таймер-лінійка", "Протягни до потрібної хвилини і натисни «Старт». Є Pomodoro і секундомір."], en: ["Timer", "A ruler timer", "Drag to the minute you want and press Start. There’s Pomodoro and a stopwatch."] },
+    { id: "clock", uk: ["Події", "Зустрічі й відліки", "Найближча зустріч з календарів Google, Outlook чи iCloud з кнопкою «Увійти», і відліки до важливих дат."], en: ["Events", "Meetings and countdowns", "Your next meeting from Google, Outlook or iCloud calendars with a Join button, and countdowns to big dates."] },
+    { id: "world", uk: ["Годинник світу", "Час в інших містах", "Міста, де живуть колеги й рідні, з різницею в годинах."], en: ["World clock", "Time in other cities", "The cities your colleagues and family live in, with the time difference."] } ] },
+  { id: "files", uk: "Файли", en: "Files", tabs: [
+    { id: "clipboard", uk: ["Буфер", "Історія буфера обміну", "Текст, посилання, картинки й скриншоти — усе, що копіював. Паролі Пуф не запам’ятовує."], en: ["Clipboard", "Clipboard history", "Text, links, images and screenshots: everything you copied. Puff never keeps passwords."] },
+    { id: "shelf", uk: ["Полиця", "Полиця для файлів", "Перетягни файли на острів — Пуф потримає їх, поки не знадобляться."], en: ["Shelf", "A shelf for files", "Drag files onto the island and Puff holds them until you need them."] },
+    { id: "notes", uk: ["Нотатки", "Швидкі нотатки", "Записав — і закрив. Нотатки зберігаються самі."], en: ["Notes", "Quick notes", "Write it down and close it. Notes save themselves."] },
+    { id: "notifications", uk: ["Сповіщення", "Пропущені сповіщення", "Банери, які ти не встиг прочитати. Лише в пам’яті: коли Мак блокується, список стирається."], en: ["Notifications", "Missed notifications", "Banners you didn’t get to read. Kept only in memory and cleared when the Mac locks."] } ] },
+  { id: "mac", uk: "Мак", en: "Mac", tabs: [
+    { id: "mac", uk: ["Монітор", "Стан Мака", "Процесор, відеокарта, пам’ять, мережа, батарея і вільне місце."], en: ["Monitor", "Your Mac’s state", "CPU, GPU, memory, network, battery and free space."] },
+    { id: "power", uk: ["Живлення", "Батарея й енергія", "Заряд, графік за шість годин і програми, які найбільше їдять батарею."], en: ["Power", "Battery and energy", "Charge, the last six hours as a chart and the apps that drain the battery most."] },
+    { id: "actions", uk: ["Дії", "Швидкі дії", "Не спати, мікрофон, темна тема, Wi‑Fi, сховати значки, приховані файли, очистити кошик — в один клік або гарячою клавішею."], en: ["Actions", "Quick actions", "Keep awake, microphone, dark mode, Wi‑Fi, hide desktop icons, hidden files, empty the Trash: one click or a shortcut."] },
+    { id: "devices", uk: ["Пристрої", "Заряд пристроїв", "AirPods з футляром, клавіатура, мишка й геймпад — і що з них підключено."], en: ["Devices", "Device batteries", "AirPods and their case, keyboard, mouse and gamepad, and which are connected."] },
+    { id: "watch", uk: ["Стеження", "Стеження за екраном", "Виділи шматок екрана — Пуф скаже, коли там щось зміниться чи закінчиться: білд, завантаження, рендер."], en: ["Watch", "Watching the screen", "Select part of the screen and Puff tells you when something there changes or finishes: a build, a download, a render."] } ] },
+  { id: "ai", uk: "ШІ-агенти", en: "AI agents", tabs: [
+    { id: "claude", uk: ["Claude", "Claude Code на виду", "Хто з агентів працює, хто чекає на тебе, скільки коштує день за цінами API і як заповнене п’ятигодинне вікно."], en: ["Claude", "Claude Code in sight", "Which agents are working and which are waiting for you, what the day costs at API prices and how full the 5-hour window is."] } ] },
+  { id: "ua", uk: "Україна", en: "Ukraine", tabs: [
+    { id: "light", uk: ["Світло", "Графік відключень", "Коли зникне й повернеться світло за твоєю групою чи адресою — на сьогодні й завтра."], en: ["Power", "Outage schedule", "When the power goes out and comes back for your group or address, today and tomorrow."] },
+    { id: "alerts", uk: ["Тривоги", "Повітряні тривоги", "Стан у твоєму місті і скільки областей зараз під тривогою."], en: ["Alerts", "Air-raid alerts", "The state in your city and how many regions are on alert right now."] },
+    { id: "rates", uk: ["Курс НБУ", "Курс НБУ на будь-який день", "Обери валюту й дату — від 1996 року до завтра. Зміна за день і графік за останній місяць."], en: ["NBU rates", "NBU rates for any day", "Pick a currency and a date, from 1996 to tomorrow. The change in a day and a chart of the last month."] },
+    { id: "tax", uk: ["Податки", "Податки ФОП", "Строки єдиного податку, військового збору й ЄСВ для твоєї групи."], en: ["Taxes", "Sole-proprietor taxes", "Deadlines for the single tax, military levy and social contribution for your group."] } ] },
+];
 
-function showTab(name) {
-  tab = name;
-  document.querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === name)));
-  document.getElementById("showImg").src = `img/${name}-${lang}.jpg`;
-  const [title, body] = text[lang].shows[name];
+let lang = "uk";
+let section = sections[0];
+let tab = section.tabs[0];
+const loaded = new Set();
+
+/* Load every picture of the current language once, so switching tabs is instant. */
+function preload() {
+  for (const s of sections) for (const t of s.tabs) {
+    const src = `img/tabs/${t.id}-${lang}.jpg`;
+    if (loaded.has(src)) continue;
+    loaded.add(src);
+    const img = new Image();
+    img.src = src;
+    img.decode?.().catch(() => {});
+  }
+}
+
+function renderTabs() {
+  const bar = document.getElementById("sections");
+  bar.replaceChildren(...sections.map(s => {
+    const b = document.createElement("button");
+    b.type = "button"; b.setAttribute("role", "tab"); b.textContent = s[lang];
+    b.setAttribute("aria-selected", String(s === section));
+    b.addEventListener("click", () => { section = s; tab = s.tabs[0]; renderTabs(); });
+    return b;
+  }));
+  const sub = document.getElementById("subtabs");
+  sub.hidden = section.tabs.length < 2;
+  sub.replaceChildren(...section.tabs.map(t => {
+    const b = document.createElement("button");
+    b.type = "button"; b.setAttribute("role", "tab"); b.textContent = t[lang][0];
+    b.setAttribute("aria-selected", String(t === tab));
+    b.addEventListener("click", () => { tab = t; renderTabs(); });
+    return b;
+  }));
+  const [, title, body] = tab[lang];
+  const img = document.getElementById("showImg");
+  img.src = `img/tabs/${tab.id}-${lang}.jpg`;
+  img.alt = title;
   document.getElementById("showTitle").textContent = title;
   document.getElementById("showText").textContent = body;
-  document.getElementById("showImg").alt = title;
 }
 
 function setLang(next) {
   lang = next;
   document.documentElement.lang = next;
   document.querySelectorAll("[data-t]").forEach(el => { const v = text[next][el.dataset.t]; if (v) el.textContent = v; });
-  document.querySelectorAll("[data-shot]").forEach(img => { img.src = `img/${img.dataset.shot}-${next}.jpg`; });
+  document.querySelectorAll("[data-shot]").forEach(img => { img.src = `img/tabs/${img.dataset.shot}-${next}.jpg`; });
+  document.querySelectorAll("[data-closed]").forEach(img => { img.src = `img/closed/closed-${img.dataset.closed}-${next}.jpg`; });
   document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === next)));
-  showTab(tab);
+  renderTabs();
+  preload();
 }
 
-document.querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
 document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
   setLang(b.dataset.lang);
   history.replaceState(null, "", "#" + b.dataset.lang);
@@ -426,3 +586,5 @@ window.addEventListener("hashchange", () => {
   if (next === "en" || next === "uk") setLang(next);
 });
 </script>
+</body>
+</html>
