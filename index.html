@@ -132,6 +132,9 @@ kbd { font: 700 13px var(--body); color: var(--text); background: var(--raise); 
 .ua .shot { border-radius: 0 0 4.12% 4.12% / 0 0 8.19% 8.19%; overflow: hidden; background: #000; box-shadow: 0 0 0 1px var(--line); }
 .ua .shot img { display: block; width: 100%; height: auto; }
 
+/* Vault */
+.vault { background: linear-gradient(135deg, rgba(110, 180, 255, .16), rgba(70, 210, 160, .10)); grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+
 /* Privacy */
 .privacy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 32px; align-items: start; }
 .hosts { display: grid; gap: 10px; }
@@ -185,7 +188,7 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
     </div>
     <div class="head" style="align-items:center">
       <h1 id="title">Puff Island</h1>
-      <p class="lede" data-t="lede">Острів біля вирізу Мака, на якому живе Пуф. Наведи мишку на чубчик — і під рукою музика, таймер, календар, тривоги й графік світла.</p>
+      <p class="lede" data-t="lede">Острів біля вирізу Мака, на якому живе Пуф. Наведи мишку на чубчик — і під рукою музика, таймер, календар, сейф з картками й документами, тривоги й графік світла.</p>
     </div>
     <div class="cta">
       <a class="button" href="https://github.com/dmytromelinevskyi/Puff-releases/releases/latest/download/Puff-Island.dmg">
@@ -233,6 +236,22 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
     </div>
   </section>
 
+  <section aria-labelledby="vaultTitle">
+    <div class="ua vault">
+      <div class="shot"><img data-shot="vault-files" src="img/tabs/vault-files-uk.jpg" alt="Сейф на острові: зашифровані файли" width="1360" height="684" loading="lazy"></div>
+      <div class="head">
+        <span class="label" data-t="vaultLabel">Сейф</span>
+        <h2 id="vaultTitle" data-t="vaultTitle">Картки, реквізити й ключі — під рукою, але під замком</h2>
+        <ul>
+          <li><span class="dot"></span><div><b data-t="v1h">Відкривається відбитком</b><span data-t="v1p">Touch ID або пароль Мака. Сейф сам закривається за п’ять хвилин або разом з островом.</span></div></li>
+          <li><span class="dot"></span><div><b data-t="v2h">Копіюєш одним кліком</b><span data-t="v2p">Номер картки, IBAN, особовий рахунок — без пробілів і зайвого. Скопійоване не потрапляє в історію буфера.</span></div></li>
+          <li><span class="dot"></span><div><b data-t="v3h">Файли зашифровані</b><span data-t="v3p">Ключі, сертифікати й скани — під AES-256 і лише на цьому Маку. Перетягни файл на острів, а оригінал прибери в Кошик.</span></div></li>
+          <li><span class="dot"></span><div><b data-t="v4h">Не видно на скриншотах</b><span data-t="v4p">Вікно сейфа не потрапляє в скриншоти й демонстрацію екрана. CVV і PIN показуються лише після відбитка й ніколи не копіюються.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section aria-labelledby="extrasTitle">
     <div class="head">
       <span class="label" data-t="extrasLabel">Для Мака</span>
@@ -267,6 +286,9 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
       <div class="card"><span class="label" data-t="c4l">Файли</span><h3 data-t="c4h">Буфер, полиця, нотатки</h3><p data-t="c4p">Історія буфера обміну, полиця, куди кидаєш файли на потім, і швидкі нотатки.</p></div>
       <div class="card"><span class="label" data-t="c5l">Мак</span><h3 data-t="c5h">⌘Tab з вікнами і швидкі дії</h3><p data-t="c5p">Перемикач вікон з усіх робочих столів, пристрої, живлення, «не засинати» в один клік.</p></div>
       <div class="card"><span class="label" data-t="c6l">ШІ-агенти</span><h3 data-t="c6h">Claude і Codex на виду</h3><p data-t="c6p">Острів підсвічується, коли агент закінчив роботу або чекає на тебе.</p></div>
+      <div class="card"><span class="label" data-t="c7l">Сейф</span><h3 data-t="c7h">Картки, реквізити, документи</h3><p data-t="c7p">Комуналка, пошти, адреси, нотатки й файли — з теками, пошуком і відбитком.</p></div>
+      <div class="card"><span class="label" data-t="c8l">Гардероб</span><h3 data-t="c8h">Речі за пуфіки</h3><p data-t="c8p">Пуфіки дають за квести, дні з Пуфом, їжу й рівні. На них — 35 речей, від окулярів до реактивного ранця.</p></div>
+      <div class="card"><span class="label" data-t="c9l">Свята</span><h3 data-t="c9h">Свята й секрети</h3><p data-t="c9p">На Новий рік, Валентина, День Незалежності й Хелловін Пуф перевдягається сам. А ще є секретний образ — знайди його.</p></div>
     </div>
   </section>
 
@@ -274,7 +296,7 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
     <div class="head">
       <span class="label" data-t="puffLabel">Пуф</span>
       <h2 id="puffTitle" data-t="puffTitle">Пуф живе своїм життям</h2>
-      <p class="lede" data-t="puffText">Він їсть, спить, ховається під ковдру під час тривоги, слухає музику разом з тобою і росте: сорок рівнів, досягнення й гардероб.</p>
+      <p class="lede" data-t="puffText">Він їсть, спить, ховається під ковдру під час тривоги, слухає музику разом з тобою і росте: 51 рівень, 18 емоцій і гардероб, який купуєш за пуфіки.</p>
     </div>
     <div class="puffs">
       <div class="puff"><img class="px" src="img/puff-happy.png" alt=""><span data-t="m1">радіє</span></div>
@@ -285,6 +307,14 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
       <div class="puff"><img class="px" src="img/puff-hot.png" alt=""><span data-t="m6">Мак перегрівся</span></div>
       <div class="puff"><img class="px" src="img/puff-racing.png" alt=""><span data-t="m7">у фокусі</span></div>
       <div class="puff"><img class="px" src="img/puff-sleeping.png" alt=""><span data-t="m8">спить</span></div>
+      <div class="puff"><img class="px" src="img/puff-love.png" alt=""><span data-t="n1">закохався</span></div>
+      <div class="puff"><img class="px" src="img/puff-laughing.png" alt=""><span data-t="n2">сміється</span></div>
+      <div class="puff"><img class="px" src="img/puff-surprised.png" alt=""><span data-t="n3">здивувався</span></div>
+      <div class="puff"><img class="px" src="img/puff-posing.png" alt=""><span data-t="n4">позує для скриншота</span></div>
+      <div class="puff"><img class="px" src="img/puff-dancing.png" alt=""><span data-t="n5">танцює в п’ятницю</span></div>
+      <div class="puff"><img class="px" src="img/puff-sneezing.png" alt=""><span data-t="n6">чхає</span></div>
+      <div class="puff"><img class="px" src="img/puff-clapping.png" alt=""><span data-t="n7">аплодує Claude</span></div>
+      <div class="puff"><img class="px" src="img/puff-proud.png" alt=""><span data-t="n8">пишається</span></div>
       <div class="puff"><img class="px" src="img/look-king.png" alt=""><span data-t="l1">король</span></div>
       <div class="puff"><img class="px" src="img/look-wizard.png" alt=""><span data-t="l2">чарівник</span></div>
       <div class="puff"><img class="px" src="img/look-surfer.png" alt=""><span data-t="l3">серфер</span></div>
@@ -316,7 +346,7 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
     <div class="head">
       <span class="label" data-t="privLabel">Приватність</span>
       <h2 id="privacyTitle" data-t="privTitle">Твоє лишається на твоєму Маку</h2>
-      <p class="lede" data-t="privText">Улюбленець, нотатки, буфер обміну й налаштування зберігаються лише на цьому Маку. Без реєстрації, статистики й реклами. В інтернет Пуф ходить тільки сюди:</p>
+      <p class="lede" data-t="privText">Улюбленець, нотатки, буфер обміну й налаштування зберігаються лише на цьому Маку. Сейф — у Зв’язці ключів без iCloud, файли в ньому зашифровані. Без реєстрації, статистики й реклами. В інтернет Пуф ходить тільки сюди:</p>
     </div>
     <div class="hosts">
       <div class="host"><b data-t="h1h">Оновлення</b><span data-t="h1p">GitHub: чи вийшла нова версія. Про тебе нічого не передається.</span></div>
@@ -359,7 +389,7 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
 <script>
 const text = {
   uk: {
-    lede: "Острів біля вирізу Мака, на якому живе Пуф. Наведи мишку на чубчик — і під рукою музика, таймер, календар, тривоги й графік світла.",
+    lede: "Острів біля вирізу Мака, на якому живе Пуф. Наведи мишку на чубчик — і під рукою музика, таймер, календар, сейф з картками й документами, тривоги й графік світла.",
     download: "Завантажити для Mac", free: "Безкоштовно", signed: "Підписано Apple",
     islandLabel: "Острів", islandTitle: "Усе, що треба, — у вирізі над робочим столом",
     tabHome: "Головна", tabMusic: "Музика", tabTime: "Час", tabRates: "Курс НБУ",
@@ -370,8 +400,17 @@ const text = {
     c4l: "Файли", c4h: "Буфер, полиця, нотатки", c4p: "Історія буфера обміну, полиця, куди кидаєш файли на потім, і швидкі нотатки.",
     c5l: "Мак", c5h: "⌘Tab з вікнами і швидкі дії", c5p: "Перемикач вікон з усіх робочих столів, пристрої, живлення, «не засинати» в один клік.",
     c6l: "ШІ-агенти", c6h: "Claude і Codex на виду", c6p: "Острів підсвічується, коли агент закінчив роботу або чекає на тебе.",
+    c7l: "Сейф", c7h: "Картки, реквізити, документи", c7p: "Комуналка, пошти, адреси, нотатки й файли — з теками, пошуком і відбитком.",
+    c8l: "Гардероб", c8h: "Речі за пуфіки", c8p: "Пуфіки дають за квести, дні з Пуфом, їжу й рівні. На них — 35 речей, від окулярів до реактивного ранця.",
+    c9l: "Свята", c9h: "Свята й секрети", c9p: "На Новий рік, Валентина, День Незалежності й Хелловін Пуф перевдягається сам. А ще є секретний образ — знайди його.",
+    n1: "закохався", n2: "сміється", n3: "здивувався", n4: "позує для скриншота", n5: "танцює в п’ятницю", n6: "чхає", n7: "аплодує Claude", n8: "пишається",
+    vaultLabel: "Сейф", vaultTitle: "Картки, реквізити й ключі — під рукою, але під замком",
+    v1h: "Відкривається відбитком", v1p: "Touch ID або пароль Мака. Сейф сам закривається за п’ять хвилин або разом з островом.",
+    v2h: "Копіюєш одним кліком", v2p: "Номер картки, IBAN, особовий рахунок — без пробілів і зайвого. Скопійоване не потрапляє в історію буфера.",
+    v3h: "Файли зашифровані", v3p: "Ключі, сертифікати й скани — під AES-256 і лише на цьому Маку. Перетягни файл на острів, а оригінал прибери в Кошик.",
+    v4h: "Не видно на скриншотах", v4p: "Вікно сейфа не потрапляє в скриншоти й демонстрацію екрана. CVV і PIN показуються лише після відбитка й ніколи не копіюються.",
     puffLabel: "Пуф", puffTitle: "Пуф живе своїм життям",
-    puffText: "Він їсть, спить, ховається під ковдру під час тривоги, слухає музику разом з тобою і росте: сорок рівнів, досягнення й гардероб.",
+    puffText: "Він їсть, спить, ховається під ковдру під час тривоги, слухає музику разом з тобою і росте: 51 рівень, 18 емоцій і гардероб, який купуєш за пуфіки.",
     m1: "радіє", m2: "їсть", m3: "слухає музику", m4: "тримає Мак без сну", m5: "ховається від тривоги", m6: "Мак перегрівся", m7: "у фокусі", m8: "спить",
     l1: "король", l2: "чарівник", l3: "серфер", l4: "панда", l5: "кіберпуф", l6: "Санта", l7: "єдиноріг", l8: "дракон",
     uaLabel: "Україна", uaTitle: "Зроблено в Україні — і для України",
@@ -380,7 +419,7 @@ const text = {
     u3h: "Курс НБУ", u3p: "Будь-яка валюта на будь-який день з 1996 року, зміна за день і графік за місяць.",
     u4h: "Податки ФОП", u4p: "Пуф нагадає про єдиний податок, військовий збір і ЄСВ за п’ять днів до строку.",
     privLabel: "Приватність", privTitle: "Твоє лишається на твоєму Маку",
-    privText: "Улюбленець, нотатки, буфер обміну й налаштування зберігаються лише на цьому Маку. Без реєстрації, статистики й реклами. В інтернет Пуф ходить тільки сюди:",
+    privText: "Улюбленець, нотатки, буфер обміну й налаштування зберігаються лише на цьому Маку. Сейф — у Зв’язці ключів без iCloud, файли в ньому зашифровані. Без реєстрації, статистики й реклами. В інтернет Пуф ходить тільки сюди:",
     h1h: "Оновлення", h1p: "GitHub: чи вийшла нова версія. Про тебе нічого не передається.",
     h2h: "Тривоги", h2p: "siren.pp.ua та ubilling.net.ua: загальний список тривог. Твоя область лишається на Маку.",
     h3h: "Світло", h3p: "YASNO отримує вулицю й будинок, які ти вказав, щоб надіслати графік.",
@@ -414,7 +453,7 @@ const text = {
     x12h: "Яскравість і Bluetooth", x12p: "Клавіші яскравості керують зовнішнім монітором під мишкою. Bluetooth вимикається, поки Мак спить, а «Музика» не запускається сама."
   },
   en: {
-    lede: "An island at your Mac’s notch, and Puff lives on it. Move the mouse to the notch for music, a timer, your calendar, air-raid alerts and power schedules.",
+    lede: "An island at your Mac’s notch, and Puff lives on it. Move the mouse to the notch for music, a timer, your calendar, a vault for cards and documents, air-raid alerts and power schedules.",
     download: "Download for Mac", free: "Free", signed: "Signed by Apple",
     islandLabel: "The island", islandTitle: "What you need, right in the notch above your desktop",
     tabHome: "Home", tabMusic: "Music", tabTime: "Time", tabRates: "NBU rates",
@@ -425,8 +464,17 @@ const text = {
     c4l: "Files", c4h: "Clipboard, shelf, notes", c4p: "Clipboard history, a shelf to drop files on for later, and quick notes.",
     c5l: "Mac", c5h: "⌘Tab with windows and quick actions", c5p: "A switcher with windows from every desktop, devices, power, keep-awake in one click.",
     c6l: "AI agents", c6h: "Claude and Codex in sight", c6p: "The island lights up when an agent finishes or is waiting for you.",
+    c7l: "Vault", c7h: "Cards, bank details, documents", c7p: "Utility accounts, emails, addresses, notes and files, with folders, search and your fingerprint.",
+    c8l: "Wardrobe", c8h: "Things for puffiks", c8p: "Puffiks come from quests, days with Puff, meals and levels. Spend them on 35 things, from glasses to a jetpack.",
+    c9l: "Holidays", c9h: "Holidays and secrets", c9p: "On New Year, Valentine’s Day, Independence Day and Halloween Puff dresses up by himself. And there’s a secret look — find it.",
+    n1: "in love", n2: "laughing", n3: "surprised", n4: "posing for a screenshot", n5: "Friday dance", n6: "sneezing", n7: "cheering Claude", n8: "proud",
+    vaultLabel: "Vault", vaultTitle: "Cards, bank details and keys — at hand, under lock",
+    v1h: "Opens with your fingerprint", v1p: "Touch ID or your Mac’s password. The vault locks itself after five minutes or when the island closes.",
+    v2h: "Copy in one click", v2p: "A card number, an IBAN, an account number — without spaces or extras. Copies stay out of the clipboard history.",
+    v3h: "Files are encrypted", v3p: "Keys, certificates and scans under AES-256, only on this Mac. Drag a file onto the island and move the original to the Trash.",
+    v4h: "Invisible in screenshots", v4p: "The vault never shows up in screenshots or screen sharing. CVV and PIN appear only after your fingerprint and are never copied.",
     puffLabel: "Puff", puffTitle: "Puff has a life of his own",
-    puffText: "He eats, sleeps, hides under a blanket during an alert, listens to music with you and grows: forty levels, achievements and a wardrobe.",
+    puffText: "He eats, sleeps, hides under a blanket during an alert, listens to music with you and grows: 51 levels, 18 emotions and a wardrobe you buy with puffiks.",
     m1: "happy", m2: "eating", m3: "listening", m4: "keeping the Mac awake", m5: "hiding from an alert", m6: "the Mac is hot", m7: "in focus", m8: "asleep",
     l1: "king", l2: "wizard", l3: "surfer", l4: "panda", l5: "cyber Puff", l6: "Santa", l7: "unicorn", l8: "dragon",
     uaLabel: "Ukraine", uaTitle: "Made in Ukraine, for Ukraine",
@@ -435,7 +483,7 @@ const text = {
     u3h: "NBU exchange rates", u3p: "Any currency on any day since 1996, the change in a day and the month as a chart.",
     u4h: "Sole-proprietor taxes", u4p: "Puff reminds you about the single tax, military levy and social contribution five days before the deadline.",
     privLabel: "Privacy", privTitle: "Yours stays on your Mac",
-    privText: "The pet, notes, clipboard and settings are kept only on this Mac. No sign-up, no statistics, no ads. Puff goes online only for this:",
+    privText: "The pet, notes, clipboard and settings are kept only on this Mac. The vault lives in the Keychain without iCloud, and its files are encrypted. No sign-up, no statistics, no ads. Puff goes online only for this:",
     h1h: "Updates", h1p: "GitHub: whether a new version is out. Nothing about you is sent.",
     h2h: "Alerts", h2p: "siren.pp.ua and ubilling.net.ua: the list of alerts. Your region stays on your Mac.",
     h3h: "Power", h3p: "YASNO gets the street and house you entered, to send the schedule.",
@@ -476,8 +524,9 @@ const sections = [
       en: ["Home", "Home, built from blocks", "Power, quick buttons, clock, calendar, Mac status, music: arrange Home yourself. Every block comes small, wide, tall or large."] } ] },
   { id: "puff", uk: "Пуф", en: "Puff", tabs: [
     { id: "pet", uk: ["Турбота", "Турбота про Пуфа", "Нагодуй, погладь, пограй або відправ Пуфа на квест: 25 хвилин фокусу без відволікань."], en: ["Care", "Taking care of Puff", "Feed him, pet him, play, or send Puff on a quest: 25 minutes of focus without distractions."] },
-    { id: "wardrobe", uk: ["Гардероб", "Шапки й костюми", "Вбрання відкриваються за рівні й досягнення. Пуф носить їх і на острові, і на робочому столі."], en: ["Wardrobe", "Hats and costumes", "Outfits unlock with levels and achievements. Puff wears them on the island and on the desktop."] },
-    { id: "levels", uk: ["Рівні", "Сорок рівнів", "Кожен рівень відкриває новий образ: за фокус, музику, ігри та інші справи з Пуфом."], en: ["Levels", "Forty levels", "Each level unlocks a new look: for focus, music, games and other things you do with Puff."] },
+    { id: "wardrobe", uk: ["Гардероб", "Гардероб за пуфіки", "Пуфіки дають за фокус-квести, дні з Пуфом, їжу й нові рівні. Витрачай їх на шапки, окуляри, вбрання й речі в лапках — і приміряй перед покупкою."], en: ["Wardrobe", "A wardrobe for puffiks", "Puffiks come from focus quests, days with Puff, meals and new levels. Spend them on hats, glasses, outfits and things to hold, and try them on before you buy."] },
+    { id: "emotions", uk: ["Емоції", "Вісімнадцять емоцій", "Пуф дивується, сміється, танцює в п’ятницю й позує, коли робиш скриншот. Під кожною емоцією написано, як її викликати."], en: ["Emotions", "Eighteen emotions", "Puff gets surprised, laughs, dances on Fridays and poses when you take a screenshot. Each emotion says how to make it happen."] },
+    { id: "levels", uk: ["Рівні", "51 рівень", "Кожен рівень відкриває новий образ: за фокус, музику, ігри, покупки й емоції. А один рівень — секретний."], en: ["Levels", "51 levels", "Each level unlocks a new look: for focus, music, games, shopping and emotions. And one level is a secret."] },
     { id: "games", uk: ["Ігри", "П’ять міні-ігор", "Ловити смаколики, знайти пару, стрибки, реакція і змійка — прямо в острові. Рекорди піднімають Пуфу настрій."], en: ["Games", "Five mini games", "Catch the treats, find the pair, jumps, reaction and snake, right in the island. Records cheer Puff up."] } ] },
   { id: "sound", uk: "Звук", en: "Sound", tabs: [
     { id: "music", uk: ["Музика", "Музика без перемикання вікон", "Що грає в Spotify чи Музиці, перемотка, гучність, вихід звуку і текст пісні, що біжить разом із треком."], en: ["Music", "Music without switching windows", "What’s playing in Spotify or Music, seeking, volume, audio output and lyrics that scroll with the song."] },
@@ -491,6 +540,11 @@ const sections = [
     { id: "shelf", uk: ["Полиця", "Полиця для файлів", "Перетягни файли на острів — Пуф потримає їх, поки не знадобляться."], en: ["Shelf", "A shelf for files", "Drag files onto the island and Puff holds them until you need them."] },
     { id: "notes", uk: ["Нотатки", "Швидкі нотатки", "Записав — і закрив. Нотатки зберігаються самі."], en: ["Notes", "Quick notes", "Write it down and close it. Notes save themselves."] },
     { id: "notifications", uk: ["Сповіщення", "Пропущені сповіщення", "Банери, які ти не встиг прочитати. Лише в пам’яті: коли Мак блокується, список стирається."], en: ["Notifications", "Missed notifications", "Banners you didn’t get to read. Kept only in memory and cleared when the Mac locks."] } ] },
+  { id: "vault", uk: "Сейф", en: "Vault", tabs: [
+    { id: "vault-cards", uk: ["Картки", "Картки під замком", "Номер видно лише останніми цифрами. Копіюй номер або все одразу — термін і ім’я, але ніколи CVV і PIN."], en: ["Cards", "Cards under lock", "Only the last digits show. Copy the number or everything at once — the date and name, but never the CVV or PIN."] },
+    { id: "vault-bank", uk: ["Реквізити", "Реквізити для оплати", "IBAN, отримувач, ЄДРПОУ й банк. IBAN копіюється без пробілів, як того хоче банківська програма."], en: ["Bank details", "Bank details for payments", "IBAN, recipient, tax ID and bank. The IBAN is copied without spaces, the way banking apps want it."] },
+    { id: "vault-utilities", uk: ["Комуналка", "Комунальні рахунки", "Особові рахунки, розкладені по теках за містами. Скопіюй рахунок — і встав у застосунок банку."], en: ["Utilities", "Utility accounts", "Account numbers sorted into folders by city. Copy the account and paste it into your banking app."] },
+    { id: "vault-files", uk: ["Файли", "Зашифровані файли", "Ключі, сертифікати й скани — під AES-256 і лише на цьому Маку. Переглянь просто в острові або витягни мишкою в Finder."], en: ["Files", "Encrypted files", "Keys, certificates and scans under AES-256, only on this Mac. Preview them right in the island or drag them out to Finder."] } ] },
   { id: "mac", uk: "Мак", en: "Mac", tabs: [
     { id: "mac", uk: ["Монітор", "Стан Мака", "Процесор, відеокарта, пам’ять, мережа, батарея і вільне місце."], en: ["Monitor", "Your Mac’s state", "CPU, GPU, memory, network, battery and free space."] },
     { id: "power", uk: ["Живлення", "Батарея й енергія", "Заряд, графік за шість годин і програми, які найбільше їдять батарею."], en: ["Power", "Battery and energy", "Charge, the last six hours as a chart and the apps that drain the battery most."] },
