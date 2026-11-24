@@ -184,7 +184,7 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
     <div class="screen">
       <img class="px peek" src="img/puff-happy.png" alt="">
       <div class="notch" aria-hidden="true"></div>
-      <div class="island"><img data-shot="home" src="img/tabs/home-uk.jpg" alt="Відкритий острів Puff Island: світло, швидкі кнопки, годинник, календар, стан Мака і музика" width="1360" height="684"></div>
+      <div class="island"><img data-shot="home" src="img/tabs/home-uk.jpg" alt="Відкритий острів Puff Island: відлік до відключення світла, заряд пристроїв, годинник, стан Мака, тривоги, музика і світовий час" width="1360" height="684"></div>
     </div>
     <div class="head" style="align-items:center">
       <h1 id="title">Puff Island</h1>
@@ -215,7 +215,7 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
       <div class="shot"><img id="showImg" src="img/tabs/home-uk.jpg" alt="" width="1360" height="684"></div>
       <div class="text">
         <h3 id="showTitle">Головна з блоків</h3>
-        <p id="showText">Світло, швидкі кнопки, годинник, календар, стан Мака, музика — збери головну сам. Кожен блок буває маленьким, широким, високим або великим.</p>
+        <p id="showText">Відлік до відключення світла, заряд навушників і мишки, годинник, тривоги, музика — збери головну сам. Кожен блок буває маленьким, широким, високим або великим.</p>
       </div>
     </div>
   </section>
@@ -365,7 +365,7 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
     <div class="end">
       <div class="card">
         <h3 data-t="e1h">Встановити</h3>
-        <p data-t="e1p">Завантаж Puff-Island.dmg, відкрий і перетягни Пуфа в «Програми». Оновлення Пуф пропонує сам.</p>
+        <p data-t="e1p">Завантаж Puff-Island.dmg і відкрий Пуфа — він сам запропонує переїхати в «Програми». Оновлення Пуф теж пропонує сам.</p>
         <a class="button" style="align-self:flex-start;font-size:15px;padding:10px 18px" href="https://github.com/dmytromelinevskyi/Puff-releases/releases/latest/download/Puff-Island.dmg" data-t="download">Завантажити для Mac</a>
       </div>
       <div class="card">
@@ -426,7 +426,7 @@ const text = {
     h4h: "Тексти пісень і обкладинки", h4p: "lrclib.net та iTunes отримують назву пісні й виконавця.",
     h5h: "Курс валют", h5p: "bank.gov.ua: офіційний курс НБУ.",
     endLabel: "Безкоштовно", endTitle: "Пуф безкоштовний. Назавжди.",
-    e1h: "Встановити", e1p: "Завантаж Puff-Island.dmg, відкрий і перетягни Пуфа в «Програми». Оновлення Пуф пропонує сам.",
+    e1h: "Встановити", e1p: "Завантаж Puff-Island.dmg і відкрий Пуфа — він сам запропонує переїхати в «Програми». Оновлення Пуф теж пропонує сам.",
     e2h: "Подякувати", e2p: "Без платної версії й підписок. Якщо Пуф тобі допомагає — пригости його насіннячком: банка monobank приймає будь-яку картку, Apple Pay і Google Pay.", jar: "Пригостити Пуфа 🌻",
     e3h: "Щось не так?", e3p: "Напиши нам — або натисни «Повідомити про проблему» в налаштуваннях Пуфа.",
     copy: "Копіювати", copied: "Скопійовано", made: "зроблено в Україні", releases: "Усі версії на GitHub",
@@ -490,7 +490,7 @@ const text = {
     h4h: "Lyrics and covers", h4p: "lrclib.net and iTunes get the song title and artist.",
     h5h: "Exchange rates", h5p: "bank.gov.ua: the official NBU rate.",
     endLabel: "Free", endTitle: "Puff is free. For good.",
-    e1h: "Install", e1p: "Download Puff-Island.dmg, open it and drag Puff to Applications. Puff offers updates himself.",
+    e1h: "Install", e1p: "Download Puff-Island.dmg and open Puff: he offers to move into Applications himself, and later offers updates too.",
     e2h: "Say thanks", e2p: "No paid version, no subscriptions. If Puff helps you, treat him to some seeds: the monobank jar takes any card, Apple Pay and Google Pay.", jar: "Treat Puff 🌻",
     e3h: "Something wrong?", e3p: "Write to us, or click “Report a Problem” in Puff’s settings.",
     copy: "Copy", copied: "Copied", made: "made in Ukraine", releases: "All versions on GitHub",
@@ -520,8 +520,8 @@ const text = {
 
 const sections = [
   { id: "home", uk: "Головна", en: "Home", tabs: [
-    { id: "home", uk: ["Головна", "Головна з блоків", "Світло, швидкі кнопки, годинник, календар, стан Мака, музика — збери головну сам. Кожен блок буває маленьким, широким, високим або великим."],
-      en: ["Home", "Home, built from blocks", "Power, quick buttons, clock, calendar, Mac status, music: arrange Home yourself. Every block comes small, wide, tall or large."] } ] },
+    { id: "home", uk: ["Головна", "Головна з блоків", "Відлік до відключення світла, заряд навушників і мишки, годинник, тривоги, музика — збери головну сам. Кожен блок буває маленьким, широким, високим або великим."],
+      en: ["Home", "Home, built from blocks", "A countdown to the next power cut, your headphones’ and mouse’s batteries, a clock, air alerts, music: arrange Home yourself. Every block comes small, wide, tall or large."] } ] },
   { id: "puff", uk: "Пуф", en: "Puff", tabs: [
     { id: "pet", uk: ["Турбота", "Турбота про Пуфа", "Нагодуй, погладь, пограй або відправ Пуфа на квест: 25 хвилин фокусу без відволікань."], en: ["Care", "Taking care of Puff", "Feed him, pet him, play, or send Puff on a quest: 25 minutes of focus without distractions."] },
     { id: "wardrobe", uk: ["Гардероб", "Гардероб за пуфіки", "Пуфіки дають за фокус-квести, дні з Пуфом, їжу й нові рівні. Витрачай їх на шапки, окуляри, вбрання й речі в лапках — і приміряй перед покупкою."], en: ["Wardrobe", "A wardrobe for puffiks", "Puffiks come from focus quests, days with Puff, meals and new levels. Spend them on hats, glasses, outfits and things to hold, and try them on before you buy."] },
