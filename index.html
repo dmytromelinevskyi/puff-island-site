@@ -121,6 +121,9 @@ kbd { font: 700 13px var(--body); color: var(--text); background: var(--raise); 
 .puff img { width: 64px; height: 64px; }
 .puff span { font-size: 13px; color: var(--muted); text-align: center; line-height: 1.25; }
 .puff:hover img { animation: hop 0.6s ease-in-out; }
+/* A hint at Puff's other side, across the whole row. */
+.puff.skuff { grid-column: 1 / -1; flex-direction: row; justify-content: center; gap: 14px; padding: 10px 16px; }
+.puff.skuff span { font-size: 15px; font-weight: 600; color: var(--text, inherit); }
 
 /* Ukraine */
 .ua { background: linear-gradient(135deg, rgba(0, 87, 183, .22), rgba(255, 215, 0, .12)); border: 1px solid var(--line); border-radius: 28px; padding: clamp(22px, 4vw, 40px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 32px; align-items: center; }
@@ -323,6 +326,7 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; g
       <div class="puff"><img class="px" src="img/look-santa.png" alt=""><span data-t="l6">Санта</span></div>
       <div class="puff"><img class="px" src="img/look-unicorn.png" alt=""><span data-t="l7">єдиноріг</span></div>
       <div class="puff"><img class="px" src="img/look-dragon.png" alt=""><span data-t="l8">дракон</span></div>
+      <div class="puff skuff"><img class="px" src="img/skuff.png" alt=""><span data-t="sk">Не доводь Пуфа до Скуфа 🍺 18+</span></div>
     </div>
   </section>
 
@@ -413,6 +417,7 @@ const text = {
     puffText: "Він їсть, спить, ховається під ковдру під час тривоги, слухає музику разом з тобою і росте: 51 рівень, 18 емоцій і гардероб, який купуєш за пуфіки.",
     m1: "радіє", m2: "їсть", m3: "слухає музику", m4: "тримає Мак без сну", m5: "ховається від тривоги", m6: "Мак перегрівся", m7: "у фокусі", m8: "спить",
     l1: "король", l2: "чарівник", l3: "серфер", l4: "панда", l5: "кіберпуф", l6: "Санта", l7: "єдиноріг", l8: "дракон",
+    sk: "Не доводь Пуфа до Скуфа 🍺 18+",
     uaLabel: "Україна", uaTitle: "Зроблено в Україні — і для України",
     u1h: "Повітряні тривоги", u1p: "Острів світиться червоним, коли в твоїй області тривога, і зеленим на відбій.",
     u2h: "Графіки відключень", u2p: "Коли зникне й повернеться світло за твоєю адресою — у Києві, Дніпрі, Одесі та інших містах.",
@@ -477,6 +482,7 @@ const text = {
     puffText: "He eats, sleeps, hides under a blanket during an alert, listens to music with you and grows: 51 levels, 18 emotions and a wardrobe you buy with puffiks.",
     m1: "happy", m2: "eating", m3: "listening", m4: "keeping the Mac awake", m5: "hiding from an alert", m6: "the Mac is hot", m7: "in focus", m8: "asleep",
     l1: "king", l2: "wizard", l3: "surfer", l4: "panda", l5: "cyber Puff", l6: "Santa", l7: "unicorn", l8: "dragon",
+    sk: "Don't let Puff go Skuff 🍺 18+",
     uaLabel: "Ukraine", uaTitle: "Made in Ukraine, for Ukraine",
     u1h: "Air-raid alerts", u1p: "The island glows red when there is an alert in your region and green when it ends.",
     u2h: "Power outage schedules", u2p: "When the power goes out and comes back at your address, in Kyiv, Dnipro, Odesa and other cities.",
